@@ -13,7 +13,7 @@ env:
   MYSQL_USER: root
   MYSQL_PASSWORD: root
   MYSQL_HOST: mysqlDB
-  NODE_ENV: test
+  # NODE_ENV: test
 
 on:
   push:
@@ -28,8 +28,8 @@ jobs:
   test-container:
     # environment: testing
     runs-on: ubuntu-latest
-    container:
-      image: node:16
+    # container:
+    #   image: node:16
 
     # env:
     #   MYSQL_DATABASE: test_projet_db
