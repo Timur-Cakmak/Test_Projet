@@ -36,7 +36,7 @@ jobs:
       MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_HOST: mysqlDB
-      NODE_ENV: test
+      # NODE_ENV: test
     services:
       mysqlDB:
         image: mysql
