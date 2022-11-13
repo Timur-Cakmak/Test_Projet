@@ -8,12 +8,12 @@
 
 name: Java CI with Maven
 
-env:
-  MYSQL_DATABASE: test_projet_db
-  MYSQL_USER: root
-  MYSQL_PASSWORD: root
-  MYSQL_HOST: mysqlDB
-  # NODE_ENV: test
+# env:
+#   MYSQL_DATABASE: test_projet_db
+#   MYSQL_USER: root
+#   MYSQL_PASSWORD: root
+#   MYSQL_HOST: mysqlDB
+#   # NODE_ENV: test
 
 on:
   push:
