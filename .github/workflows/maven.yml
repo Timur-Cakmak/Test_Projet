@@ -8,11 +8,11 @@
 
 name: Java CI with Maven
 
-# env:
-#   MYSQL_DATABASE: test_projet_db
-#   MYSQL_USER: root
-#   MYSQL_PASSWORD: root
-#   MYSQL_HOST: mysqlDB
+env:
+  MYSQL_DATABASE: test_projet_db
+  MYSQL_USER: root
+  MYSQL_PASSWORD: root
+  MYSQL_HOST: mysqlDB
 #   # NODE_ENV: test
 
 on:
@@ -31,29 +31,29 @@ jobs:
     # container:
     #   image: node:16
 
-    # env:
-    #   MYSQL_DATABASE: test_projet_db
-    #   MYSQL_USER: root
-    #   MYSQL_PASSWORD: root
-    #   MYSQL_HOST: mysqlDB
-    #   NODE_ENV: test
-    # services:
-    #   mysqlDB:
-    #     image: mysql
-    #     ports:
-    #       - 3306
-    #     env:
-    #       # MYSQL_ROOT_PASSWORD: root
-    #       MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
-    #       # MYSQL_USER: ${{ env.MYSQL_USER }}
-    #       # MYSQL_PASSWORD: ${{ env. MYSQL_PASSWORD}}
-    #       MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_PASSWORD }}
-    #     options: >-
-    #       --name=mysqlDB
-    #       --health-cmd="mysqladmin ping"
-    #       --health-interval=10s
-    #       --health-timeout=5s
-    #       --health-retries=3
+    env:
+      MYSQL_DATABASE: test_projet_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_HOST: mysqlDB
+      NODE_ENV: test
+    services:
+      mysqlDB:
+        image: mysql
+        ports:
+          - 3306
+        env:
+          # MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
+          # MYSQL_USER: ${{ env.MYSQL_USER }}
+          # MYSQL_PASSWORD: ${{ env. MYSQL_PASSWORD}}
+          MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_PASSWORD }}
+        options: >-
+          --name=mysqlDB
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
 
     steps:
       - uses: actions/checkout@v3
