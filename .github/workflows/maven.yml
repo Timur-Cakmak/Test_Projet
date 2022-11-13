@@ -14,47 +14,47 @@ on:
   pull_request:
     branches: ["main"]
 
-env:
-  MYSQL_DB_NAME: test_projet_db
+# env:
+#   MYSQL_DB_NAME: test_projet_db
 
 jobs:
-  test-container:
-    environment: testing
-    runs-on: ubuntu-latest
-    container:
-      image: mysql
+  # test-container:
+  #   environment: testing
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: mysql
 
-    env:
-      MYSQL_DATABASE: test_projet_db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_HOST: mysqlDB
-      NODE_ENV: test
+  #   env:
+  #     MYSQL_DATABASE: test_projet_db
+  #     MYSQL_USER: root
+  #     MYSQL_PASSWORD: root
+  #     MYSQL_HOST: mysqlDB
+  #     NODE_ENV: test
+  #   services:
+  #     mysqlDB:
+  #       image: mysql
+  #       env:
+  #         MYSQL_ROOT_PASSWORD: root
+
+  test-container:
+    runs-on: ubuntu-latest
+    container: ubuntu
     services:
-      mysqlDB:
-        image: mysql
+      mydb:
+        image: mysql:5.7
         env:
           MYSQL_ROOT_PASSWORD: root
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+    steps:
+      - name: Verify MySQL connection from container
+        run: |
+          apt-get update
+          apt-get install -y mysql-client
+          mysql --host mydb -uroot -ppassword -e "SHOW DATABASES"
 
-    # test-container:
-    #   runs-on: ubuntu-latest
-    #   container: ubuntu
-    #   services:
-    #     mydb:
-    #       image: mysql:5.7
-    #       env:
-    #         MYSQL_ROOT_PASSWORD: password
-    #       options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
-    #   steps:
-    #   - name: Verify MySQL connection from container
-    #     run: |
-    #       apt-get update
-    #       apt-get install -y mysql-client
-    #       mysql --host mydb -uroot -ppassword -e "SHOW DATABASES"
-
-    # build:
-    #   needs: test-container
-    #   runs-on: ubuntu-latest
+  build:
+    needs: test-container
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
