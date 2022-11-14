@@ -6,16 +6,37 @@ on:
   pull_request:
     branches: ["main"]
 
+# jobs:
+#   test-container:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Set up JDK 17
+#         uses: actions/setup-java@v3
+#         with:
+#           java-version: "17"
+#           distribution: "temurin"
+#           cache: maven
+#       - name: Build with Maven
+#         run: mvn -B package --file pom.xml
+
 jobs:
-  test-container:
+  run-all-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - name: Chechout
+        uses: actions/checkout@v3
+
+      - name: Setup Java
         uses: actions/setup-java@v3
         with:
           java-version: "17"
           distribution: "temurin"
-          cache: maven
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+
+      - name: Setup Maven
+        uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: 3.8.2
+
+      - name: Run All Tests and Coverage Checks
+        uses: mvn clean install
