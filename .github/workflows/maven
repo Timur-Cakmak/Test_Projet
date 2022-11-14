@@ -12,7 +12,7 @@ env:
   MYSQL_DATABASE: test_projet_db
   MYSQL_USER: root
   MYSQL_PASSWORD: root
-  MYSQL_HOST: mysqlDB
+  # MYSQL_HOST: mysqlDB
 #   # NODE_ENV: test
 
 on:
@@ -35,7 +35,7 @@ jobs:
       MYSQL_DATABASE: test_projet_db
       MYSQL_USER: root
       MYSQL_PASSWORD: root
-      MYSQL_HOST: mysqlDB
+      # MYSQL_HOST: mysqlDB
       # NODE_ENV: test
     services:
       mysqlDB:
